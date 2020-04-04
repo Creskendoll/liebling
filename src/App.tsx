@@ -5,7 +5,7 @@ import GameMode from "./misc/GameEnum";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import WindowContext from "./misc/WindowContext";
 function App() {
-  const [gameMode, setGameMode] = useState(GameMode.MENU);
+  const [gameMode, setGameMode] = useState(GameMode.GAME);
 
   const _onMenuBtnClick = (gameMode: GameMode) => {
     setGameMode(gameMode);
