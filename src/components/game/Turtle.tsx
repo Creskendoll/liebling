@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import Sprite from "./Sprite";
 import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
-import { pickRandom } from "../../misc/Util";
+import { pickRandom, scalePos } from "../../misc/Util";
 
 interface Props {
   flipped: boolean;
+  initPos: ObjectPosition;
   onClick: () => void;
 }
 
@@ -14,11 +15,6 @@ interface TurtleState {
   heading: "left" | "right";
 }
 
-let frame = 0;
-setInterval(() => {
-  frame = (frame + 1) % 4;
-}, 200);
-
 const frames = [
   require("../../assets/turtle/1l.png"),
   require("../../assets/turtle/2l.png"),
@@ -26,11 +22,16 @@ const frames = [
   require("../../assets/turtle/4l.png"),
 ];
 
+let frame = 0;
+setInterval(() => {
+  frame = (frame + 1) % frames.length;
+}, 200);
+
 function Turtle(props: Props) {
   const windowSize = useContext(WindowContext);
 
   const [turtle, setTurtle] = useState<TurtleState>({
-    pos: { X: 0.35, Y: 0.82 },
+    pos: props.initPos,
     heading: pickRandom(["right", "left"]),
   });
 
@@ -38,9 +39,15 @@ function Turtle(props: Props) {
   useEffect(() => {
     const anim = setInterval(() => {
       const getHeading = () => {
-        if (turtle.heading === "right" && turtle.pos.X > 0.7) {
+        if (
+          turtle.heading === "right" &&
+          turtle.pos.X > props.initPos.X + 0.4
+        ) {
           return "left";
-        } else if (turtle.heading === "left" && turtle.pos.X < 0.3) {
+        } else if (
+          turtle.heading === "left" &&
+          turtle.pos.X < props.initPos.X - 0.1
+        ) {
           return "right";
         }
         return turtle.heading;
@@ -69,14 +76,7 @@ function Turtle(props: Props) {
     return () => {
       clearInterval(anim);
     };
-  }, [turtle, props.flipped]);
-
-  const scalePos = (pos: ObjectPosition): ObjectPosition => {
-    return {
-      X: pos.X * windowSize.width,
-      Y: pos.Y * windowSize.height,
-    };
-  };
+  }, [turtle, props.flipped, props.initPos.X]);
 
   const getRotation = () => {
     if (props.flipped) return "rotateX(180deg)";
@@ -87,10 +87,10 @@ function Turtle(props: Props) {
   return (
     <Sprite
       frame={frames[frame]}
-      position={scalePos(turtle.pos)}
+      position={scalePos(turtle.pos, windowSize)}
       rotation={getRotation()}
       flipY={props.flipped}
-      tileSize={150}
+      tileSize={130}
       onClick={props.onClick}
     />
   );

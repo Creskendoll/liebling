@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Sprite from "./Sprite";
 import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
-import { pickRandom } from "../../misc/Util";
+import { pickRandom, scalePos } from "../../misc/Util";
+import Image from "./Image";
 
 interface Props {
   moving: boolean;
@@ -102,21 +103,34 @@ function Butterfly(props: Props) {
     };
   }, [state, props.moving, props.initPos]);
 
-  const scalePos = (pos: ObjectPosition): ObjectPosition => {
-    return {
-      X: pos.X * windowSize.width,
-      Y: pos.Y * windowSize.height,
-    };
-  };
-
   return (
-    <Sprite
-      frame={props.moving ? frames[frame] : frames[0]}
-      position={scalePos(state.pos)}
-      rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
-      tileSize={64}
-      onClick={props.onClick}
-    />
+    <div>
+      {props.moving ? (
+        <div>
+          <Image
+            imageIndex={0}
+            initPos={props.initPos}
+            falling={true}
+            onClick={() => {}}
+          />
+          <Sprite
+            frame={props.moving ? frames[frame] : frames[0]}
+            position={scalePos(state.pos, windowSize)}
+            rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
+            tileSize={64}
+            onClick={props.onClick}
+          />
+        </div>
+      ) : (
+        <Sprite
+          frame={props.moving ? frames[frame] : frames[0]}
+          position={scalePos(state.pos, windowSize)}
+          rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
+          tileSize={64}
+          onClick={props.onClick}
+        />
+      )}
+    </div>
   );
 }
 
