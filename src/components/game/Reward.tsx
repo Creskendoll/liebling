@@ -3,13 +3,14 @@ import ObjectPosition from "../../misc/ObjectPosition";
 import { scalePos } from "../../misc/Util";
 import WindowContext from "../../misc/WindowContext";
 import Sprite from "./Sprite";
-
-const images = [require("../../assets/rewards/1.png")];
+import "../../style/scene.css";
+import Particles from "react-particles-js";
+import { heartsParams } from "../../misc/ParticleParams";
 
 interface Props {
-  imageIndex: number;
+  img: string;
   initPos: ObjectPosition;
-  falling: boolean;
+  showing: boolean;
   onClick: () => void;
 }
 
@@ -20,33 +21,45 @@ interface ImageState {
 function Image(props: Props) {
   const windowSize = useContext(WindowContext);
 
+  const imgPadding = windowSize.height * 0.05;
+
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
   });
   // Component did mount
   useEffect(() => {
     const anim = setInterval(() => {
-      if (props.falling && state.position.Y < 0.8) {
+      if (props.showing && state.position.Y < 0.75) {
         setState({
           position: {
             X: state.position.X,
             Y: state.position.Y + 0.004,
           },
         });
+      } else if (!props.showing) {
+        setState({ position: props.initPos });
       }
     }, 15);
     return () => {
       clearInterval(anim);
     };
-  }, [state, props.falling]);
+  }, [state, props.showing, props.initPos]);
 
   return (
-    <Sprite
-      frame={images[props.imageIndex]}
-      position={scalePos(state.position, windowSize)}
-      tileSize={200}
-      onClick={props.onClick}
-    />
+    <div className="reward">
+      {props.showing && (
+        <Sprite
+          frame={props.img}
+          position={scalePos(state.position, windowSize)}
+          tileSize={windowSize.height * 0.2}
+          onClick={props.onClick}
+          imgPadding={imgPadding}
+          zIndex={999}
+        >
+          <Particles style={{ position: "absolute" }} params={heartsParams} />
+        </Sprite>
+      )}
+    </div>
   );
 }
 

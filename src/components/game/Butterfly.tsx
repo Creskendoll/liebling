@@ -3,7 +3,7 @@ import Sprite from "./Sprite";
 import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
 import { pickRandom, scalePos } from "../../misc/Util";
-import Image from "./Image";
+import Reward from "./Reward";
 
 interface Props {
   moving: boolean;
@@ -49,6 +49,7 @@ function Butterfly(props: Props) {
     headingH: pickRandom(["right", "left"]),
     headingV: pickRandom(["up", "down"]),
   });
+  const [rewardShowing, setRewardShowing] = useState(false);
 
   // Component did mount
   useEffect(() => {
@@ -105,31 +106,26 @@ function Butterfly(props: Props) {
 
   return (
     <div>
-      {props.moving ? (
-        <div>
-          <Image
-            imageIndex={0}
-            initPos={props.initPos}
-            falling={true}
-            onClick={() => {}}
-          />
-          <Sprite
-            frame={props.moving ? frames[frame] : frames[0]}
-            position={scalePos(state.pos, windowSize)}
-            rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
-            tileSize={64}
-            onClick={props.onClick}
-          />
-        </div>
-      ) : (
-        <Sprite
-          frame={props.moving ? frames[frame] : frames[0]}
-          position={scalePos(state.pos, windowSize)}
-          rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
-          tileSize={64}
-          onClick={props.onClick}
-        />
-      )}
+      <Reward
+        img={require("../../assets/rewards/1.png")}
+        initPos={props.initPos}
+        showing={rewardShowing}
+        onClick={() => {
+          setRewardShowing(false);
+        }}
+      />
+      <Sprite
+        frame={props.moving ? frames[frame] : frames[0]}
+        position={scalePos(state.pos, windowSize)}
+        rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
+        tileSize={windowSize.height * 0.07}
+        onClick={() => {
+          if (!props.moving) {
+            setRewardShowing(true);
+          }
+          props.onClick();
+        }}
+      />
     </div>
   );
 }

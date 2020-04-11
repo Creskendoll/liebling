@@ -3,6 +3,7 @@ import Sprite from "./Sprite";
 import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
 import { pickRandom, scalePos } from "../../misc/Util";
+import Reward from "./Reward";
 
 interface Props {
   flipped: boolean;
@@ -29,6 +30,7 @@ setInterval(() => {
 
 function Turtle(props: Props) {
   const windowSize = useContext(WindowContext);
+  const [rewardShowing, setRewardShowing] = useState(false);
 
   const [turtle, setTurtle] = useState<TurtleState>({
     pos: props.initPos,
@@ -85,14 +87,32 @@ function Turtle(props: Props) {
   };
 
   return (
-    <Sprite
-      frame={frames[frame]}
-      position={scalePos(turtle.pos, windowSize)}
-      rotation={getRotation()}
-      flipY={props.flipped}
-      tileSize={130}
-      onClick={props.onClick}
-    />
+    <div>
+      <Reward
+        img={require("../../assets/rewards/1.png")}
+        initPos={{
+          X: props.initPos.X,
+          Y: props.initPos.Y - 0.1,
+        }}
+        showing={rewardShowing}
+        onClick={() => {
+          setRewardShowing(false);
+        }}
+      />
+      <Sprite
+        frame={frames[frame]}
+        position={scalePos(turtle.pos, windowSize)}
+        rotation={getRotation()}
+        flipY={props.flipped}
+        tileSize={windowSize.height * 0.15}
+        onClick={() => {
+          if (props.initPos.X === turtle.pos.X) {
+            setRewardShowing(true);
+          }
+          props.onClick();
+        }}
+      />
+    </div>
   );
 }
 

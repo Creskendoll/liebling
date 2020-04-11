@@ -18,31 +18,34 @@ function Scene() {
         src={require("../assets/bg4.jpg")}
       ></img>
       <Cloud
+        hasReward={true}
         speed={Math.random() * 0.001 + 0.0005}
         type={0}
         initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
         onClick={() => {}}
       />
-      <Cloud
+      {/* <Cloud
+        hasReward={true}
         speed={Math.random() * 0.001 + 0.0005}
         type={1}
         initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
         onClick={() => {}}
       />
       <Cloud
+        hasReward={Math.random() < 0.5}
         speed={Math.random() * 0.001 + 0.0005}
         type={2}
         initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
         onClick={() => {}}
-      />
+      /> */}
       <img
-        className="bg-img"
+        className="bg-img fg-img"
         alt="Scene"
         src={require("../assets/bg4_fg.png")}
       ></img>
       <Turtle
         initPos={{ X: 0.25, Y: 0.82 }}
-        onClick={() => setTurtleFlipped(false)}
+        onClick={() => setTurtleFlipped(!turtleFlipped)}
         flipped={turtleFlipped}
       />
       <Tree

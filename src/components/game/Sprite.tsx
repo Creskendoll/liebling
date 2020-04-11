@@ -5,10 +5,13 @@ interface Props {
   frame: string;
   position: ObjectPosition;
   tileSize: number;
+  imgPadding?: number;
+  children?: JSX.Element;
   rotation?: string;
   onClick?: () => void;
   flipX?: boolean;
   flipY?: boolean;
+  zIndex?: number;
 }
 function Sprite(props: Props) {
   return (
@@ -20,20 +23,24 @@ function Sprite(props: Props) {
         position: "absolute",
         justifyContent: "center",
         alignItems: "center",
+        zIndex: props.zIndex || 0,
       }}
     >
-      <img
-        src={props.frame}
-        style={{
-          transition: "0.3s ease-in-out",
-          filter: "drop-shadow(5px 5px 5px #222)",
-          transform: props.rotation,
-          height: props.tileSize,
-          width: props.tileSize,
-          imageRendering: "pixelated",
-        }}
-        alt="Game object"
-      />
+      {props.children}
+      <div style={{ padding: props.imgPadding || 0 }}>
+        <img
+          src={props.frame}
+          style={{
+            transition: "0.3s ease-in-out",
+            filter: "drop-shadow(5px 5px 5px #222)",
+            transform: props.rotation,
+            height: props.tileSize,
+            width: props.tileSize,
+            imageRendering: "pixelated",
+          }}
+          alt="Game object"
+        />
+      </div>
     </div>
   );
 }

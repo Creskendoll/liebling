@@ -3,12 +3,14 @@ import ObjectPosition from "../../misc/ObjectPosition";
 import Sprite from "./Sprite";
 import { scalePos } from "../../misc/Util";
 import WindowContext from "../../misc/WindowContext";
+import Reward from "./Reward";
 
 interface Props {
   initPos: ObjectPosition;
   onClick: () => void;
   type: number;
   speed: number;
+  hasReward: boolean;
 }
 
 interface CloudState {
@@ -28,6 +30,7 @@ function Cloud(props: Props) {
   const [state, setState] = useState<CloudState>({
     position: props.initPos,
   });
+  const [rewardShowing, setRewardShowing] = useState(false);
 
   // Component did mount
   useEffect(() => {
@@ -54,12 +57,25 @@ function Cloud(props: Props) {
   }, [state, props.speed]);
 
   return (
-    <Sprite
-      frame={frames[props.type]}
-      position={scalePos(state.position, windowSize)}
-      tileSize={200}
-      onClick={props.onClick}
-    />
+    <div>
+      <Reward
+        img={require("../../assets/rewards/1.png")}
+        initPos={state.position}
+        showing={rewardShowing}
+        onClick={() => {
+          setRewardShowing(false);
+        }}
+      />
+      <Sprite
+        frame={frames[props.type]}
+        position={scalePos(state.position, windowSize)}
+        tileSize={windowSize.height * 0.2}
+        onClick={() => {
+          setRewardShowing(true);
+          props.onClick();
+        }}
+      />
+    </div>
   );
 }
 
