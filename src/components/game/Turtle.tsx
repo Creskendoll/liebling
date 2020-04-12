@@ -59,8 +59,8 @@ function Turtle(props: Props) {
           pos: {
             X:
               turtle.heading === "right"
-                ? turtle.pos.X + 0.001
-                : turtle.pos.X - 0.001,
+                ? turtle.pos.X + 0.0008
+                : turtle.pos.X - 0.0008,
             Y: turtle.pos.Y,
           },
           heading: getHeading(),
@@ -95,16 +95,14 @@ function Turtle(props: Props) {
           Y: props.initPos.Y - 0.1,
         }}
         showing={rewardShowing}
-        onClick={() => {
-          setRewardShowing(false);
-        }}
+        onClick={() => {}}
       />
       <Sprite
         frame={frames[frame]}
         position={scalePos(turtle.pos, windowSize)}
         rotation={getRotation()}
         flipY={props.flipped}
-        tileSize={windowSize.height * 0.15}
+        tileSize={windowSize.height * 0.12}
         onClick={() => {
           if (props.initPos.X === turtle.pos.X) {
             setRewardShowing(true);

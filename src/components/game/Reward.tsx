@@ -18,18 +18,20 @@ interface ImageState {
   position: ObjectPosition;
 }
 
+const padding = 0.05;
+const size = 0.2;
 function Image(props: Props) {
   const windowSize = useContext(WindowContext);
-
-  const imgPadding = windowSize.height * 0.05;
 
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
   });
+  const [collected, setCollected] = useState(false);
+
   // Component did mount
   useEffect(() => {
     const anim = setInterval(() => {
-      if (props.showing && state.position.Y < 0.75) {
+      if (props.showing && state.position.Y < 1 - padding - size) {
         setState({
           position: {
             X: state.position.X,
@@ -37,7 +39,9 @@ function Image(props: Props) {
           },
         });
       } else if (!props.showing) {
-        setState({ position: props.initPos });
+        setState({
+          position: props.initPos,
+        });
       }
     }, 15);
     return () => {
@@ -47,13 +51,16 @@ function Image(props: Props) {
 
   return (
     <div className="reward">
-      {props.showing && (
+      {props.showing && !collected && (
         <Sprite
           frame={props.img}
           position={scalePos(state.position, windowSize)}
-          tileSize={windowSize.height * 0.2}
-          onClick={props.onClick}
-          imgPadding={imgPadding}
+          tileSize={windowSize.height * size}
+          onClick={() => {
+            setCollected(true);
+            props.onClick();
+          }}
+          imgPadding={windowSize.height * padding}
           zIndex={999}
         >
           <Particles style={{ position: "absolute" }} params={heartsParams} />

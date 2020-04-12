@@ -62,9 +62,7 @@ function Cloud(props: Props) {
         img={require("../../assets/rewards/1.png")}
         initPos={state.position}
         showing={rewardShowing}
-        onClick={() => {
-          setRewardShowing(false);
-        }}
+        onClick={() => {}}
       />
       <Sprite
         frame={frames[props.type]}

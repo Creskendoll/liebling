@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Sprite from "./Sprite";
 import { scalePos } from "../../misc/Util";
 import WindowContext from "../../misc/WindowContext";
 import ObjectPosition from "../../misc/ObjectPosition";
+import Reward from "./Reward";
 
 interface Props {
   isGrown: boolean;
@@ -21,14 +22,26 @@ const frames = [
 
 function Tree(props: Props) {
   const windowSize = useContext(WindowContext);
+  const [rewardShowing, setRewardShowing] = useState(false);
 
   return (
-    <Sprite
-      frame={props.isGrown ? frames[1] : frames[0]}
-      position={scalePos(props.position, windowSize)}
-      tileSize={windowSize.height * 0.4}
-      onClick={props.onClick}
-    />
+    <div>
+      <Reward
+        img={require("../../assets/rewards/1.png")}
+        initPos={props.position}
+        showing={rewardShowing}
+        onClick={() => {}}
+      />
+      <Sprite
+        frame={props.isGrown ? frames[1] : frames[0]}
+        position={scalePos(props.position, windowSize)}
+        tileSize={windowSize.height * 0.4}
+        onClick={() => {
+          setRewardShowing(true);
+          props.onClick();
+        }}
+      />
+    </div>
   );
 }
 

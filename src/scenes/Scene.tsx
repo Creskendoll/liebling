@@ -4,11 +4,28 @@ import Turtle from "../components/game/Turtle";
 import Butterfly from "../components/game/Butterfly";
 import Tree from "../components/game/Tree";
 import Cloud from "../components/game/Cloud";
+import Rabbit from "../components/game/Rabbit";
+
+const clouds = () => {
+  return [1, 2, 3, 4, 5].map((i) => {
+    return (
+      <Cloud
+        key={i}
+        hasReward={Math.random() > 0.5}
+        speed={Math.random() * 0.001 + 0.0005}
+        type={i % 4}
+        initPos={{ X: Math.random() * 0.1, Y: Math.random() * 0.2 }}
+        onClick={() => {}}
+      />
+    );
+  });
+};
 
 function Scene() {
   const [turtleFlipped, setTurtleFlipped] = useState(true);
   const [butMoving, setButMoving] = useState(false);
   const [treeGrown, setTreeGrown] = useState(false);
+  const [rabbitMoving, setRabbitMoving] = useState(false);
 
   return (
     <div className="scene">
@@ -17,27 +34,7 @@ function Scene() {
         alt="Scene"
         src={require("../assets/bg4.jpg")}
       ></img>
-      <Cloud
-        hasReward={true}
-        speed={Math.random() * 0.001 + 0.0005}
-        type={0}
-        initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
-        onClick={() => {}}
-      />
-      {/* <Cloud
-        hasReward={true}
-        speed={Math.random() * 0.001 + 0.0005}
-        type={1}
-        initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
-        onClick={() => {}}
-      />
-      <Cloud
-        hasReward={Math.random() < 0.5}
-        speed={Math.random() * 0.001 + 0.0005}
-        type={2}
-        initPos={{ X: Math.random() * 0.05, Y: Math.random() * 0.1 }}
-        onClick={() => {}}
-      /> */}
+      {clouds()}
       <img
         className="bg-img fg-img"
         alt="Scene"
@@ -47,6 +44,11 @@ function Scene() {
         initPos={{ X: 0.25, Y: 0.82 }}
         onClick={() => setTurtleFlipped(!turtleFlipped)}
         flipped={turtleFlipped}
+      />
+      <Rabbit
+        initPos={{ X: 0.75, Y: 0.82 }}
+        onClick={() => setRabbitMoving(!rabbitMoving)}
+        moving={rabbitMoving}
       />
       <Tree
         position={{ X: 0.3, Y: 0.45 }}
