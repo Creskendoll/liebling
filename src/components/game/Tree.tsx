@@ -27,7 +27,7 @@ function Tree(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1.png")}
+        img={require("../../assets/rewards/3c.jpg")}
         initPos={props.position}
         showing={rewardShowing}
         onClick={() => {}}

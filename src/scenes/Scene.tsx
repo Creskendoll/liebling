@@ -7,7 +7,7 @@ import Cloud from "../components/game/Cloud";
 import Rabbit from "../components/game/Rabbit";
 
 const clouds = () => {
-  return [1, 2, 3, 4, 5].map((i) => {
+  return [1, 2, 3].map((i) => {
     return (
       <Cloud
         key={i}

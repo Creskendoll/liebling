@@ -89,7 +89,7 @@ function Turtle(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1.png")}
+        img={require("../../assets/rewards/2c.jpg")}
         initPos={{
           X: props.initPos.X,
           Y: props.initPos.Y - 0.1,

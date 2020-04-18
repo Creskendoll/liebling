@@ -107,7 +107,7 @@ function Butterfly(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1.png")}
+        img={require("../../assets/rewards/1c.jpg")}
         initPos={props.initPos}
         showing={rewardShowing}
         onClick={() => {
