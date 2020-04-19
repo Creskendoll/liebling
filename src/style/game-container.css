@@ -1,12 +1,10 @@
-.background {
+.game-container {
+  /* border: 2px black solid; */
+
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
-
-.game-container {
-  /* border: 2px black solid; */
   height: 100vh;
   max-height: 100vh;
   width: 100vw;

@@ -5,6 +5,7 @@ import Butterfly from "../components/game/Butterfly";
 import Tree from "../components/game/Tree";
 import Cloud from "../components/game/Cloud";
 import Rabbit from "../components/game/Rabbit";
+import { backgrounds } from "../misc/GameAssets";
 
 const clouds = () => {
   return [1, 2, 3].map((i) => {
@@ -12,7 +13,6 @@ const clouds = () => {
       <Cloud
         key={i}
         hasReward={Math.random() > 0.5}
-        speed={Math.random() * 0.001 + 0.0005}
         type={i % 4}
         initPos={{ X: Math.random() * 0.1, Y: Math.random() * 0.2 }}
         onClick={() => {}}
@@ -24,22 +24,15 @@ const clouds = () => {
 function Scene() {
   const [turtleFlipped, setTurtleFlipped] = useState(true);
   const [butMoving, setButMoving] = useState(false);
+  const [butMoving2, setBut2Moving] = useState(false);
   const [treeGrown, setTreeGrown] = useState(false);
   const [rabbitMoving, setRabbitMoving] = useState(false);
 
   return (
     <div className="scene">
-      <img
-        className="bg-img"
-        alt="Scene"
-        src={require("../assets/bg4.jpg")}
-      ></img>
+      <img className="bg-img" alt="Scene" src={backgrounds[0]}></img>
       {clouds()}
-      <img
-        className="bg-img fg-img"
-        alt="Scene"
-        src={require("../assets/bg4_fg.png")}
-      ></img>
+      <img className="bg-img fg-img" alt="Scene" src={backgrounds[1]}></img>
       <Turtle
         initPos={{ X: 0.25, Y: 0.82 }}
         onClick={() => setTurtleFlipped(!turtleFlipped)}
@@ -56,9 +49,16 @@ function Scene() {
         onClick={() => setTreeGrown(!treeGrown)}
       />
       <Butterfly
+        type="1"
         initPos={{ X: 0.2, Y: 0.36 }}
         onClick={() => setButMoving(true)}
         moving={butMoving}
+      />
+      <Butterfly
+        type="2"
+        initPos={{ X: 0.75, Y: 0.75 }}
+        onClick={() => setBut2Moving(true)}
+        moving={butMoving2}
       />
     </div>
   );

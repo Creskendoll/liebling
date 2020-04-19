@@ -38,6 +38,36 @@ const photos = [
     width: 1,
     height: 1,
   },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
+  {
+    src: require("../../assets/rewards/3c.jpg"),
+    width: 1,
+    height: 1,
+  },
 ];
 
 function Collection() {
@@ -51,12 +81,18 @@ function Collection() {
     left,
     key,
   }) => {
+    const imgStyle = { margin: margin, display: "block" };
+    if (direction === "column") {
+      imgStyle["position"] = "absolute";
+      imgStyle["left"] = left;
+      imgStyle["top"] = top;
+    }
     return (
       <img
         alt="gallery item"
         className="photo"
         key={key}
-        style={{ margin: margin, display: "block" }}
+        style={imgStyle}
         {...photo}
         // onClick={onClick ? handleClick : null}
       />
@@ -66,17 +102,16 @@ function Collection() {
   return (
     <div
       style={{
-        height: "100%",
-        marginLeft: "8vw",
-        marginRight: "8vw",
+        overflowY: "auto",
+        height: "90vh",
+        marginLeft: "6vw",
+        marginRight: "5vw",
         marginTop: "5vh",
         marginBottom: "5vh",
-        border: "solid black 2px",
       }}
     >
       <Gallery
-        columns={(w) => 2}
-        targetRowHeight={3}
+        columns={3}
         renderImage={_renderImage as any}
         margin={15}
         photos={photos}

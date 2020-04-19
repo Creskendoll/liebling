@@ -5,7 +5,7 @@ import WindowContext from "../../misc/WindowContext";
 import Sprite from "./Sprite";
 import "../../style/scene.css";
 import Particles from "react-particles-js";
-import { heartsParams } from "../../misc/ParticleParams";
+import { getHeartsParams } from "../../misc/ParticleParams";
 
 interface Props {
   img: string;
@@ -22,6 +22,7 @@ const padding = 0.05;
 const size = 0.2;
 function Image(props: Props) {
   const windowSize = useContext(WindowContext);
+  const [animParams] = useState(getHeartsParams());
 
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
@@ -63,7 +64,7 @@ function Image(props: Props) {
           imgPadding={windowSize.height * padding}
           zIndex={999}
         >
-          <Particles style={{ position: "absolute" }} params={heartsParams} />
+          <Particles style={{ position: "absolute" }} params={animParams} />
         </Sprite>
       )}
     </div>

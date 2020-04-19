@@ -4,6 +4,7 @@ import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
 import { pickRandom, scalePos } from "../../misc/Util";
 import Reward from "./Reward";
+import { rabbitFrames, rewards } from "../../misc/GameAssets";
 
 interface Props {
   moving: boolean;
@@ -16,33 +17,9 @@ interface stateState {
   heading: "left" | "right";
 }
 
-const frames = {
-  standing: [
-    require("../../assets/rabbit/stand1.png"),
-    require("../../assets/rabbit/stand1.png"),
-    require("../../assets/rabbit/stand2.png"),
-    require("../../assets/rabbit/stand2.png"),
-    require("../../assets/rabbit/stand3.png"),
-    require("../../assets/rabbit/stand3.png"),
-    require("../../assets/rabbit/stand4.png"),
-    require("../../assets/rabbit/stand4.png"),
-    require("../../assets/rabbit/stand4.png"),
-  ],
-  moving: [
-    require("../../assets/rabbit/run1.png"),
-    require("../../assets/rabbit/run1.png"),
-    require("../../assets/rabbit/run2.png"),
-    require("../../assets/rabbit/run3.png"),
-    require("../../assets/rabbit/run4.png"),
-    require("../../assets/rabbit/run5.png"),
-    require("../../assets/rabbit/run5.png"),
-    require("../../assets/rabbit/run6.png"),
-  ],
-};
-
 let frame = 0;
 setInterval(() => {
-  frame = (frame + 1) % frames.standing.length;
+  frame = (frame + 1) % rabbitFrames.standing.length;
 }, 200);
 
 function Rabbit(props: Props) {
@@ -101,7 +78,7 @@ function Rabbit(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1.png")}
+        img={rewards[2]}
         initPos={{
           X: props.initPos.X,
           Y: props.initPos.Y - 0.1,
@@ -112,8 +89,8 @@ function Rabbit(props: Props) {
       <Sprite
         frame={
           props.moving
-            ? frames.moving[frame % frames.moving.length]
-            : frames.standing[frame]
+            ? rabbitFrames.moving[frame % rabbitFrames.moving.length]
+            : rabbitFrames.standing[frame]
         }
         position={scalePos(state.pos, windowSize)}
         rotation={getRotation()}

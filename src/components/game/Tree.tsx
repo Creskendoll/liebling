@@ -4,21 +4,13 @@ import { scalePos } from "../../misc/Util";
 import WindowContext from "../../misc/WindowContext";
 import ObjectPosition from "../../misc/ObjectPosition";
 import Reward from "./Reward";
+import { treeFrames, rewards } from "../../misc/GameAssets";
 
 interface Props {
   isGrown: boolean;
   onClick: () => void;
   position: ObjectPosition;
 }
-
-const frames = [
-  require("../../assets/plants/tree1_dry.png"),
-  require("../../assets/plants/tree1_wet.png"),
-  require("../../assets/plants/tree2_dry.png"),
-  require("../../assets/plants/tree2_wet.png"),
-  require("../../assets/plants/tree3_dry.png"),
-  require("../../assets/plants/tree3_wet.png"),
-];
 
 function Tree(props: Props) {
   const windowSize = useContext(WindowContext);
@@ -27,13 +19,13 @@ function Tree(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/3c.jpg")}
+        img={rewards[1]}
         initPos={props.position}
         showing={rewardShowing}
         onClick={() => {}}
       />
       <Sprite
-        frame={props.isGrown ? frames[1] : frames[0]}
+        frame={props.isGrown ? treeFrames[1] : treeFrames[0]}
         position={scalePos(props.position, windowSize)}
         tileSize={windowSize.height * 0.4}
         onClick={() => {

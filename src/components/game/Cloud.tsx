@@ -4,12 +4,12 @@ import Sprite from "./Sprite";
 import { scalePos } from "../../misc/Util";
 import WindowContext from "../../misc/WindowContext";
 import Reward from "./Reward";
+import { cloudFrames, rewards } from "../../misc/GameAssets";
 
 interface Props {
   initPos: ObjectPosition;
   onClick: () => void;
   type: number;
-  speed: number;
   hasReward: boolean;
 }
 
@@ -17,15 +17,9 @@ interface CloudState {
   position: ObjectPosition;
 }
 
-const frames = [
-  require("../../assets/cloud/1.png"),
-  require("../../assets/cloud/2.png"),
-  require("../../assets/cloud/3.png"),
-  require("../../assets/cloud/4.png"),
-];
-
 function Cloud(props: Props) {
   const windowSize = useContext(WindowContext);
+  const [speed] = useState(Math.random() * 0.001 + 0.0005);
 
   const [state, setState] = useState<CloudState>({
     position: props.initPos,
@@ -45,7 +39,7 @@ function Cloud(props: Props) {
       } else {
         setState({
           position: {
-            X: state.position.X + props.speed,
+            X: state.position.X + speed,
             Y: state.position.Y,
           },
         });
@@ -54,18 +48,18 @@ function Cloud(props: Props) {
     return () => {
       clearInterval(anim);
     };
-  }, [state, props.speed]);
+  }, [state, speed]);
 
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1.png")}
+        img={rewards[0]}
         initPos={state.position}
         showing={rewardShowing}
         onClick={() => {}}
       />
       <Sprite
-        frame={frames[props.type]}
+        frame={cloudFrames[props.type]}
         position={scalePos(state.position, windowSize)}
         tileSize={windowSize.height * 0.2}
         onClick={() => {

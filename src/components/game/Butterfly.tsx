@@ -4,9 +4,11 @@ import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
 import { pickRandom, scalePos } from "../../misc/Util";
 import Reward from "./Reward";
+import { butterflyFrames, rewards } from "../../misc/GameAssets";
 
 interface Props {
   moving: boolean;
+  type: "1" | "2";
   initPos: ObjectPosition;
   onClick: () => void;
 }
@@ -27,19 +29,6 @@ setInterval(() => {
     frame -= 1;
   }
 }, 100);
-
-const frames = [
-  require("../../assets/butterfly/01/1.png"),
-  require("../../assets/butterfly/01/2.png"),
-  require("../../assets/butterfly/01/3.png"),
-  require("../../assets/butterfly/01/4.png"),
-  require("../../assets/butterfly/01/5.png"),
-  require("../../assets/butterfly/01/6.png"),
-  require("../../assets/butterfly/01/7.png"),
-  require("../../assets/butterfly/01/8.png"),
-  require("../../assets/butterfly/01/9.png"),
-  require("../../assets/butterfly/01/10.png"),
-];
 
 function Butterfly(props: Props) {
   const windowSize = useContext(WindowContext);
@@ -107,7 +96,7 @@ function Butterfly(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/1c.jpg")}
+        img={rewards[0]}
         initPos={props.initPos}
         showing={rewardShowing}
         onClick={() => {
@@ -115,7 +104,11 @@ function Butterfly(props: Props) {
         }}
       />
       <Sprite
-        frame={props.moving ? frames[frame] : frames[0]}
+        frame={
+          props.moving
+            ? butterflyFrames[props.type][frame]
+            : butterflyFrames[props.type][0]
+        }
         position={scalePos(state.pos, windowSize)}
         rotation={state.headingH === "left" ? "rotateY(180deg)" : ""}
         tileSize={windowSize.height * 0.07}

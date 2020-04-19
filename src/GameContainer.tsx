@@ -28,11 +28,7 @@ const GameContainer = (props: Props) => {
   };
 
   // Render the current game
-  return (
-    <div className="background">
-      <div className="game-container">{getGame()}</div>
-    </div>
-  );
+  return <div className="game-container">{getGame()}</div>;
 };
 
 export default GameContainer;

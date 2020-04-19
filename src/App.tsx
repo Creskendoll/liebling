@@ -4,8 +4,11 @@ import GameContainer from "./GameContainer";
 import GameMode from "./misc/GameEnum";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import WindowContext from "./misc/WindowContext";
+import { loadAssets } from "./misc/GameAssets";
+
 function App() {
-  const [gameMode, setGameMode] = useState(GameMode.COLLECTION);
+  const [gameMode, setGameMode] = useState(GameMode.GAME);
+  const [loading, setLoading] = useState(true);
 
   const _onMenuBtnClick = (gameMode: GameMode) => {
     setGameMode(gameMode);
@@ -27,21 +30,29 @@ function App() {
   useEffect(() => {
     updateWindowDimensions();
 
+    loadAssets(() => setLoading(false));
+
     window.addEventListener("resize", updateWindowDimensions);
   }, []);
 
   return (
     <WindowContext.Provider value={windowSize}>
-      <div className="App">
-        {gameMode !== GameMode.MENU && (
-          <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
-            <button onClick={_onBackClick} className="back-button">
-              <IoMdArrowRoundBack />
-            </button>
-          </div>
-        )}
-        <GameContainer gameMode={gameMode} onMenuBtnClick={_onMenuBtnClick} />
-      </div>
+      {loading ? (
+        <span>Loading</span>
+      ) : (
+        <div>
+          {gameMode !== GameMode.MENU && (
+            <div
+              style={{ display: "flex", flexDirection: "row", width: "100%" }}
+            >
+              <button onClick={_onBackClick} className="back-button">
+                <IoMdArrowRoundBack />
+              </button>
+            </div>
+          )}
+          <GameContainer gameMode={gameMode} onMenuBtnClick={_onMenuBtnClick} />
+        </div>
+      )}
     </WindowContext.Provider>
   );
 }

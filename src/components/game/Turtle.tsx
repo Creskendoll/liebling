@@ -4,6 +4,7 @@ import ObjectPosition from "../../misc/ObjectPosition";
 import WindowContext from "../../misc/WindowContext";
 import { pickRandom, scalePos } from "../../misc/Util";
 import Reward from "./Reward";
+import { turtleFrames, rewards } from "../../misc/GameAssets";
 
 interface Props {
   flipped: boolean;
@@ -16,16 +17,9 @@ interface TurtleState {
   heading: "left" | "right";
 }
 
-const frames = [
-  require("../../assets/turtle/1l.png"),
-  require("../../assets/turtle/2l.png"),
-  require("../../assets/turtle/3l.png"),
-  require("../../assets/turtle/4l.png"),
-];
-
 let frame = 0;
 setInterval(() => {
-  frame = (frame + 1) % frames.length;
+  frame = (frame + 1) % turtleFrames.length;
 }, 200);
 
 function Turtle(props: Props) {
@@ -43,7 +37,7 @@ function Turtle(props: Props) {
       const getHeading = () => {
         if (
           turtle.heading === "right" &&
-          turtle.pos.X > props.initPos.X + 0.4
+          turtle.pos.X > props.initPos.X + 0.2
         ) {
           return "left";
         } else if (
@@ -89,7 +83,7 @@ function Turtle(props: Props) {
   return (
     <div>
       <Reward
-        img={require("../../assets/rewards/2c.jpg")}
+        img={rewards[1]}
         initPos={{
           X: props.initPos.X,
           Y: props.initPos.Y - 0.1,
@@ -98,7 +92,7 @@ function Turtle(props: Props) {
         onClick={() => {}}
       />
       <Sprite
-        frame={frames[frame]}
+        frame={turtleFrames[frame]}
         position={scalePos(turtle.pos, windowSize)}
         rotation={getRotation()}
         flipY={props.flipped}
