@@ -7,7 +7,7 @@ import WindowContext from "./misc/WindowContext";
 import { loadAssets } from "./misc/GameAssets";
 
 function App() {
-  const [gameMode, setGameMode] = useState(GameMode.GAME);
+  const [gameMode, setGameMode] = useState(GameMode.ABOUT);
   const [loading, setLoading] = useState(true);
 
   const _onMenuBtnClick = (gameMode: GameMode) => {

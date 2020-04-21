@@ -1,6 +1,7 @@
 import React from "react";
 import Gallery from "react-photo-gallery";
 import "../../style/collection.css";
+import useRewardStorage from "../../misc/StorageService";
 
 const photos = [
   {
@@ -71,6 +72,16 @@ const photos = [
 ];
 
 function Collection() {
+  const [rewards] = useRewardStorage();
+
+  const _getPhotos = rewards.map((r) => {
+    return {
+      src: r,
+      width: 1,
+      height: 1,
+    };
+  });
+
   const _renderImage = ({
     index,
     onClick,
@@ -114,7 +125,7 @@ function Collection() {
         columns={3}
         renderImage={_renderImage as any}
         margin={15}
-        photos={photos}
+        photos={_getPhotos}
       />
     </div>
   );

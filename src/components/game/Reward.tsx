@@ -6,6 +6,7 @@ import Sprite from "./Sprite";
 import "../../style/scene.css";
 import Particles from "react-particles-js";
 import { getHeartsParams } from "../../misc/ParticleParams";
+import useRewardStorage from "../../misc/StorageService";
 
 interface Props {
   img: string;
@@ -23,6 +24,8 @@ const size = 0.2;
 function Image(props: Props) {
   const windowSize = useContext(WindowContext);
   const [animParams] = useState(getHeartsParams());
+
+  const [rewards, setRewards] = useRewardStorage();
 
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
@@ -59,6 +62,9 @@ function Image(props: Props) {
           tileSize={windowSize.height * size}
           onClick={() => {
             setCollected(true);
+            if (!rewards.includes(props.img)) {
+              setRewards(rewards.concat(props.img));
+            }
             props.onClick();
           }}
           imgPadding={windowSize.height * padding}

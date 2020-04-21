@@ -96,6 +96,7 @@ const loadAssets = (then: () => void) =>
     ...rabbitFrames.moving,
     ...cloudFrames,
     ...butterflyFrames["1"],
+    ...butterflyFrames["2"],
     ...treeFrames,
     ...rewards,
     ...backgrounds,

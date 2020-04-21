@@ -44,7 +44,7 @@ function Scene() {
         moving={rabbitMoving}
       />
       <Tree
-        position={{ X: 0.3, Y: 0.45 }}
+        position={{ X: 0.25, Y: 0.3 }}
         isGrown={treeGrown}
         onClick={() => setTreeGrown(!treeGrown)}
       />

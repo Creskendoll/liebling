@@ -27,7 +27,7 @@ function Tree(props: Props) {
       <Sprite
         frame={props.isGrown ? treeFrames[1] : treeFrames[0]}
         position={scalePos(props.position, windowSize)}
-        tileSize={windowSize.height * 0.4}
+        tileSize={windowSize.height * 0.5}
         onClick={() => {
           setRewardShowing(true);
           props.onClick();

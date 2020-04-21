@@ -2,7 +2,7 @@ import { IParticlesParams } from "react-particles-js";
 import { pickRandom } from "./Util";
 import { particles } from "./GameAssets";
 
-const getHeartsParams: () => IParticlesParams = () => {
+const getHeartsParams: (count?: number) => IParticlesParams = (count) => {
   return {
     retina_detect: true,
     fps_limit: 60,
@@ -76,7 +76,7 @@ const getHeartsParams: () => IParticlesParams = () => {
           value_area: 800,
         },
         max: 0,
-        value: 30,
+        value: count || 30,
       },
       opacity: {
         anim: {
