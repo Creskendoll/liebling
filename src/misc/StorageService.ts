@@ -3,13 +3,13 @@ import React from "react";
 const STORAGE_KEY = "@rewards";
 
 const useRewardStorage = () => {
-  const [rewards, setRewards] = React.useState(
+  const [storedRewards, setStoredRewards] = React.useState(
     JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
   );
   React.useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(rewards));
-  }, [rewards]);
-  return [rewards, setRewards];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(storedRewards));
+  }, [storedRewards]);
+  return [storedRewards, setStoredRewards];
 };
 
 export default useRewardStorage;

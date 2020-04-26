@@ -32,7 +32,7 @@ function About() {
           backgroundColor: "rgba(245,150,200,0.6)",
           boxShadow: "10px 10px 15px",
           zIndex: 3,
-          border: "solid rgba(245,150,200,0.8) 5px",
+          border: "outset rgba(245,150,200,0.8) 5px",
         }}
       >
         {/* <div
@@ -52,13 +52,14 @@ function About() {
             style={{
               padding: "1vh",
               display: "inline-block",
-              borderBottom: "solid black 1px",
+              borderBottom: "dashed antiquewhite 1px",
             }}
           >
             <span
               style={{
                 fontSize: 30,
                 fontFamily: "'Lobster', cursive",
+                color: "antiquewhite",
               }}
             >
               Made for someone special by someone who dreams.
@@ -70,8 +71,10 @@ function About() {
               fontSize: 25,
               fontWeight: "bold",
               fontFamily: "'Indie Flower', cursive",
+              color: "aliceblue",
             }}
           >
+            <br />
             I am grateful for the memories
             <br />
             Grateful for the time
@@ -81,9 +84,15 @@ function About() {
             You are my morning star
             <br />
             <br />
-            Happy birthday mein schatz, I hope you get to enjoy a lovely year.
-            <br />
-            #Ken
+            <span
+              style={{
+                color: "antiquewhite",
+              }}
+            >
+              Happy birthday mein schatz, I hope you get to enjoy a lovely year.
+              <br />
+              #Ken
+            </span>
           </p>
         </div>
       </div>

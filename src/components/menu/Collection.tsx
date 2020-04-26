@@ -1,131 +1,124 @@
 import React from "react";
-import Gallery from "react-photo-gallery";
 import "../../style/collection.css";
 import useRewardStorage from "../../misc/StorageService";
-
-const photos = [
-  {
-    src: require("../../assets/rewards/1c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/2c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-  {
-    src: require("../../assets/rewards/3c.jpg"),
-    width: 1,
-    height: 1,
-  },
-];
+import Particles from "react-particles-js";
+import { getHeartsParams } from "../../misc/ParticleParams";
+import { pickRandom } from "../../misc/Util";
+import { rewards } from "../../misc/GameAssets";
 
 function Collection() {
-  const [rewards] = useRewardStorage();
+  const [storedRewards, setStoredRewards] = useRewardStorage();
 
-  const _getPhotos = rewards.map((r) => {
-    return {
-      src: r,
-      width: 1,
-      height: 1,
-    };
-  });
-
-  const _renderImage = ({
-    index,
-    onClick,
-    photo,
-    margin,
-    direction,
-    top,
-    left,
-    key,
-  }) => {
-    const imgStyle = { margin: margin, display: "block" };
-    if (direction === "column") {
-      imgStyle["position"] = "absolute";
-      imgStyle["left"] = left;
-      imgStyle["top"] = top;
+  const _onImgClick = (
+    source: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    const win = window.open(source.currentTarget.src, "_blank");
+    if (win) {
+      win.focus();
     }
-    return (
-      <img
-        alt="gallery item"
-        className="photo"
-        key={key}
-        style={imgStyle}
-        {...photo}
-        // onClick={onClick ? handleClick : null}
-      />
-    );
   };
 
   return (
-    <div
-      style={{
-        overflowY: "auto",
-        height: "90vh",
-        marginLeft: "6vw",
-        marginRight: "5vw",
-        marginTop: "5vh",
-        marginBottom: "5vh",
-      }}
-    >
-      <Gallery
-        columns={3}
-        renderImage={_renderImage as any}
-        margin={15}
-        photos={_getPhotos}
+    <div className="gallery-container">
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 2,
+          height: "100%",
+          width: "100%",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          border: "solid",
+          overflowY: "scroll",
+          paddingTop: "5vh",
+          paddingLeft: "5vw",
+        }}
+      >
+        <div className="row">
+          <div className="column" style={{ paddingBottom: "10vh" }}>
+            {storedRewards.includes(rewards[0]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[0]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+            {storedRewards.includes(rewards[1]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[1]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+            {storedRewards.includes(rewards[2]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[2]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+          </div>
+        </div>
+
+        <button
+          onClick={() => setStoredRewards([])}
+          style={{
+            position: "absolute",
+            right: "6%",
+            bottom: "8%",
+            borderRadius: 20,
+            border: 0,
+            padding: 10,
+            fontFamily: "",
+            fontSize: 30,
+            backgroundColor: "rgba(240, 10, 10, 0.6)",
+            cursor: "pointer",
+          }}
+        >
+          <img
+            style={{
+              height: 30,
+              width: 30,
+            }}
+            src={require("../../assets/clear.png")}
+            alt="collection item"
+          />
+        </button>
+      </div>
+      <Particles
+        style={{
+          position: "absolute",
+          height: "100%",
+          display: "flex",
+          filter: "blur(2px) opacity(70%)",
+          zIndex: 1,
+          top: 0,
+          left: 0,
+        }}
+        params={getHeartsParams()}
       />
     </div>
   );

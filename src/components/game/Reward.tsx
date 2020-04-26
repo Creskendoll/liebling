@@ -25,7 +25,7 @@ function Image(props: Props) {
   const windowSize = useContext(WindowContext);
   const [animParams] = useState(getHeartsParams());
 
-  const [rewards, setRewards] = useRewardStorage();
+  const [storedRewards, setStoredRewards] = useRewardStorage();
 
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
@@ -62,8 +62,8 @@ function Image(props: Props) {
           tileSize={windowSize.height * size}
           onClick={() => {
             setCollected(true);
-            if (!rewards.includes(props.img)) {
-              setRewards(rewards.concat(props.img));
+            if (!storedRewards.includes(props.img)) {
+              setStoredRewards(storedRewards.concat(props.img));
             }
             props.onClick();
           }}
