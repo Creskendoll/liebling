@@ -96,8 +96,11 @@ function Butterfly(props: Props) {
   return (
     <div>
       <Reward
-        img={rewards[0]}
-        initPos={props.initPos}
+        img={props.type === "1" ? rewards[3] : rewards[4]}
+        initPos={{
+          X: props.initPos.X,
+          Y: props.initPos.Y - 0.1,
+        }}
         showing={rewardShowing}
         onClick={() => {
           setRewardShowing(false);

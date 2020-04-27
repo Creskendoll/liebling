@@ -42,13 +42,9 @@ function App() {
       ) : (
         <div>
           {gameMode !== GameMode.MENU && (
-            <div
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              <button onClick={_onBackClick} className="back-button">
-                <IoMdArrowRoundBack />
-              </button>
-            </div>
+            <button onClick={_onBackClick} className="back-button">
+              <IoMdArrowRoundBack style={{ height: "5vh", width: "5vh" }} />
+            </button>
           )}
           <GameContainer gameMode={gameMode} onMenuBtnClick={_onMenuBtnClick} />
         </div>

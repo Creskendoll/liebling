@@ -1,16 +1,15 @@
 .back-button {
   position: absolute;
+  top: 5vh;
+  left: 5vh;
   font-family: fantasy;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   cursor: pointer;
   border: 0px;
-  padding: 1vw;
-  font-size: 2em;
   z-index: 9999;
-  margin: 2vw;
-  border-radius: 1em;
+  border-radius: 2em;
   -webkit-transition: 0.3s ease-in-out;
   -moz-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;

@@ -37,6 +37,7 @@ function Sprite(props: Props) {
             height: props.tileSize,
             width: props.tileSize,
             imageRendering: "pixelated",
+            objectFit: "contain",
           }}
           alt="Game object"
         />

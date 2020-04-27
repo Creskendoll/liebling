@@ -53,7 +53,7 @@ function Cloud(props: Props) {
   return (
     <div>
       <Reward
-        img={rewards[0]}
+        img={rewards[5]}
         initPos={state.position}
         showing={rewardShowing}
         onClick={() => {}}

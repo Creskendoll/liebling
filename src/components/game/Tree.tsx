@@ -19,7 +19,7 @@ function Tree(props: Props) {
   return (
     <div>
       <Reward
-        img={rewards[1]}
+        img={rewards[0]}
         initPos={props.position}
         showing={rewardShowing}
         onClick={() => {}}

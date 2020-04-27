@@ -81,7 +81,7 @@ function Rabbit(props: Props) {
         img={rewards[2]}
         initPos={{
           X: props.initPos.X,
-          Y: props.initPos.Y - 0.1,
+          Y: props.initPos.Y - 0.15,
         }}
         showing={rewardShowing}
         onClick={() => {}}

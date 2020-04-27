@@ -3,7 +3,7 @@ import "../../style/collection.css";
 import useRewardStorage from "../../misc/StorageService";
 import Particles from "react-particles-js";
 import { getHeartsParams } from "../../misc/ParticleParams";
-import { pickRandom } from "../../misc/Util";
+// import { pickRandom } from "../../misc/Util";
 import { rewards } from "../../misc/GameAssets";
 
 function Collection() {
@@ -30,10 +30,10 @@ function Collection() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-          border: "solid",
-          overflowY: "scroll",
-          paddingTop: "5vh",
+          overflowY: "hidden",
           paddingLeft: "5vw",
+          paddingRight: "5vw",
+          // border: "solid 10px",
         }}
       >
         <div className="row">
@@ -81,33 +81,78 @@ function Collection() {
               />
             )}
           </div>
-        </div>
 
-        <button
-          onClick={() => setStoredRewards([])}
-          style={{
-            position: "absolute",
-            right: "6%",
-            bottom: "8%",
-            borderRadius: 20,
-            border: 0,
-            padding: 10,
-            fontFamily: "",
-            fontSize: 30,
-            backgroundColor: "rgba(240, 10, 10, 0.6)",
-            cursor: "pointer",
-          }}
-        >
-          <img
-            style={{
-              height: 30,
-              width: 30,
-            }}
-            src={require("../../assets/clear.png")}
-            alt="collection item"
-          />
-        </button>
+          <div className="column" style={{ paddingBottom: "10vh" }}>
+            {storedRewards.includes(rewards[3]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[3]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+            {storedRewards.includes(rewards[4]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[4]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+            {storedRewards.includes(rewards[2]) ? (
+              <img
+                onClick={(e) => _onImgClick(e)}
+                className="photo"
+                src={rewards[2]}
+                alt="collection item"
+              />
+            ) : (
+              <img
+                className="none-img"
+                src={require("../../assets/rewards/none.png")}
+                alt="collection item"
+              />
+            )}
+          </div>
+        </div>
       </div>
+      <button
+        onClick={() => setStoredRewards([])}
+        style={{
+          position: "absolute",
+          right: "6%",
+          bottom: "8%",
+          borderRadius: 20,
+          border: 0,
+          padding: 10,
+          fontFamily: "",
+          fontSize: 30,
+          zIndex: 99999,
+          backgroundColor: "rgba(240, 10, 10, 0.6)",
+          cursor: "pointer",
+        }}
+      >
+        <img
+          style={{
+            height: 30,
+            width: 30,
+          }}
+          src={require("../../assets/clear.png")}
+          alt="collection item"
+        />
+      </button>
       <Particles
         style={{
           position: "absolute",

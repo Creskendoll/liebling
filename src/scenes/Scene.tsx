@@ -6,13 +6,17 @@ import Tree from "../components/game/Tree";
 import Cloud from "../components/game/Cloud";
 import Rabbit from "../components/game/Rabbit";
 import { backgrounds } from "../misc/GameAssets";
+import { pickRandom } from "../misc/Util";
 
 const clouds = () => {
-  return [1, 2, 3].map((i) => {
+  const clouds = [1, 2, 3];
+  const hasReward = pickRandom(clouds);
+
+  return clouds.map((i) => {
     return (
       <Cloud
         key={i}
-        hasReward={Math.random() > 0.5}
+        hasReward={i === hasReward}
         type={i % 4}
         initPos={{ X: Math.random() * 0.1, Y: Math.random() * 0.2 }}
         onClick={() => {}}

@@ -73,9 +73,12 @@ const treeFrames = [
 ];
 
 const rewards = [
-  require("../assets/rewards/1c.jpg"),
-  require("../assets/rewards/2c.jpg"),
-  require("../assets/rewards/3c.jpg"),
+  require("../assets/rewards/1.jpg"),
+  require("../assets/rewards/5.jpg"),
+  require("../assets/rewards/2.jpg"),
+  require("../assets/rewards/4.jpg"),
+  require("../assets/rewards/3.jpg"),
+  require("../assets/rewards/6.jpg"),
 ];
 
 const backgrounds = [
