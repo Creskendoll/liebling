@@ -52,12 +52,15 @@ function Cloud(props: Props) {
 
   return (
     <div>
-      <Reward
-        img={rewards[5]}
-        initPos={state.position}
-        showing={rewardShowing}
-        onClick={() => {}}
-      />
+      {props.hasReward && (
+        <Reward
+          img={rewards[5]}
+          initPos={state.position}
+          showing={rewardShowing}
+          onClick={() => {}}
+        />
+      )}
+
       <Sprite
         frame={cloudFrames[props.type]}
         position={scalePos(state.position, windowSize)}

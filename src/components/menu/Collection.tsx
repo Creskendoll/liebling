@@ -111,11 +111,11 @@ function Collection() {
                 alt="collection item"
               />
             )}
-            {storedRewards.includes(rewards[2]) ? (
+            {storedRewards.includes(rewards[5]) ? (
               <img
                 onClick={(e) => _onImgClick(e)}
                 className="photo"
-                src={rewards[2]}
+                src={rewards[5]}
                 alt="collection item"
               />
             ) : (

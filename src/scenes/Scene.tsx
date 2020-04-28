@@ -8,17 +8,16 @@ import Rabbit from "../components/game/Rabbit";
 import { backgrounds } from "../misc/GameAssets";
 import { pickRandom } from "../misc/Util";
 
-const clouds = () => {
-  const clouds = [1, 2, 3];
-  const hasReward = pickRandom(clouds);
+const clouds = [1, 2, 3, 4, 5];
 
+const getClouds = (rewardIndex: number) => {
   return clouds.map((i) => {
     return (
       <Cloud
         key={i}
-        hasReward={i === hasReward}
+        hasReward={i === rewardIndex}
         type={i % 4}
-        initPos={{ X: Math.random() * 0.1, Y: Math.random() * 0.2 }}
+        initPos={{ X: Math.random() * 0.3, Y: Math.random() * 0.2 }}
         onClick={() => {}}
       />
     );
@@ -26,6 +25,7 @@ const clouds = () => {
 };
 
 function Scene() {
+  const [rewardCloud] = useState(pickRandom(clouds));
   const [turtleFlipped, setTurtleFlipped] = useState(true);
   const [butMoving, setButMoving] = useState(false);
   const [butMoving2, setBut2Moving] = useState(false);
@@ -35,7 +35,7 @@ function Scene() {
   return (
     <div className="scene">
       <img className="bg-img" alt="Scene" src={backgrounds[0]}></img>
-      {clouds()}
+      {getClouds(rewardCloud)}
       <img className="bg-img fg-img" alt="Scene" src={backgrounds[1]}></img>
       <Turtle
         initPos={{ X: 0.25, Y: 0.82 }}

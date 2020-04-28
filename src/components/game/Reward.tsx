@@ -25,12 +25,19 @@ function Image(props: Props) {
   const windowSize = useContext(WindowContext);
   const [animParams] = useState(getHeartsParams());
 
-  const [storedRewards, setStoredRewards] = useRewardStorage();
+  const [_, setStoredRewards] = useRewardStorage();
 
   const [state, setState] = useState<ImageState>({
     position: props.initPos,
   });
   const [collected, setCollected] = useState(false);
+
+  const addReward = () => {
+    const currentRewards = JSON.parse(localStorage.getItem("@rewards") || "[]");
+    if (!currentRewards.includes(props.img)) {
+      setStoredRewards(currentRewards.concat(props.img));
+    }
+  };
 
   // Component did mount
   useEffect(() => {
@@ -62,9 +69,8 @@ function Image(props: Props) {
           tileSize={windowSize.height * size}
           onClick={() => {
             setCollected(true);
-            if (!storedRewards.includes(props.img)) {
-              setStoredRewards(storedRewards.concat(props.img));
-            }
+            addReward();
+
             props.onClick();
           }}
           imgPadding={windowSize.height * padding}

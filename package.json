@@ -1,6 +1,7 @@
 {
   "name": "liebling",
   "version": "0.1.0",
+  "homepage": "./liebling",
   "private": true,
   "devDependencies": {
     "@types/node": "^12.0.0",
@@ -13,8 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
-    "react-particles-js": "^2.7.0",
-    "react-photo-gallery": "^8.0.0"
+    "react-particles-js": "^2.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
